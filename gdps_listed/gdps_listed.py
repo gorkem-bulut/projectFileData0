@@ -2,8 +2,11 @@
 
 import pandas
 import folium
+import eel
 
-
+if __name__ == '__main__':
+    eel.init(".")
+    eel.start(r"C:/Users/Gorkem/Desktop/GitHub%20Uploads/projectFile/gdps_listed/world_map_gdp.html")
 
 veri = pandas.read_excel("gdps_listed.xlsx")
 
