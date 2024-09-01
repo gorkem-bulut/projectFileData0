@@ -4,14 +4,11 @@ import pandas
 import folium
 import eel
 
-if __name__ == '__main__':
-    eel.init(".")
-    eel.start(r"C:/Users/Gorkem/Desktop/GitHub%20Uploads/projectFile/gdps_listed/world_map_gdp.html")
 
-veri = pandas.read_excel("gdps_listed.xlsx")
+#GDP
+veri = pandas.read_excel(r"C:\Users\Gorkem\Desktop\GitHub Uploads\projectFile\gdps_listed\gdps_listed.xlsx")
 
-
-
+#GDP Excel Labels
 enlemler       = list(veri["Enlem"])
 boylamlar      = list(veri["Boylam"])
 son_yil_gdp    = list(veri["Son"])
@@ -126,7 +123,7 @@ for enlem, boylam, onceki_gdp, son_gdp in zip(enlemler, boylamlar, onceki_yil_gd
 
 #Ulke sinirlarinin cizilmesi
 nufus_dagilim_haritasi.add_child(folium.GeoJson(data = (open("world.json", "r", encoding = "utf-8-sig").read()),
-                                        style_function = lambda x :{"fillColor": "red" if x["properties"]["POP2005"] > 100000000 else "orange",
+                                        style_function = lambda x :{"fillColor": "#E37222" if x["properties"]["POP2005"] > 100000000 else "#0A8A9F",
                                         "color" : "white", "weight" : 0.75},
                                         highlight_function = lambda x :{"fillColor": "black"}, ))
 
@@ -141,7 +138,11 @@ world_map.add_child(nufus_dagilim_haritasi)
 
 
 world_map.add_child(folium.LayerControl()) #buton fonksiyonu
+world_map.add_child(folium.LatLngPopup()) #
 
 
+world_map.save("world_map_gdp.html") #html olarak kayit 
 
-world_map.save("world_map_gdp.html") #html olarak kayit
+if __name__ == '__main__':
+    eel.init(".")
+    eel.start(r"C:\Users\Gorkem\Desktop\GitHub Uploads\projectFile\gdps_listed/world_map_gdp.html")
